@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Loop Problems</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #edf3ff;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px #cbd6e8;
+        }
+
+        h1 {
+            color: #4267a5;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #c4d2e8;
+            border-radius: 8px;
+        }
+
+        button {
+            background: #4267a5;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        #result {
+            background: #f2f6ff;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Loop Coding Problems</h1>
+        <p>Choose a problem and enter a number.</p>
+
+        <select id="problem">
+            <option value="count">Print numbers from 1 to N</option>
+            <option value="sum">Sum of numbers from 1 to N</option>
+            <option value="table">Multiplication table</option>
+            <option value="even">Print even numbers</option>
+            <option value="factorial">Find factorial</option>
+        </select>
+
+        <input type="number" id="number"
+               placeholder="Enter a number" min="0" max="100">
+
+        <button onclick="solveProblem()">Solve Problem</button>
+
+        <h3>Result:</h3>
+        <p id="result">Your answer will appear here.</p>
+    </div>
+
+    <script>
+        function solveProblem() {
+            let n = Number(document.getElementById("number").value);
+            let problem = document.getElementById("problem").value;
+            let result = document.getElementById("result");
+            let output = [];
+
+            if (document.getElementById("number").value === "") {
+                result.textContent = "Please enter a number.";
+                return;
+            }
+
+            if (n < 0 || n > 100 || !Number.isInteger(n)) {
+                result.textContent = "Enter a whole number from 0 to 100.";
+                return;
+            }
+
+            if (problem === "count") {
+                for (let i = 1; i <= n; i++) {
+                    output.push(i);
+                }
+                result.textContent = output.join(", ");
+            }
+
+            else if (problem === "sum") {
+                let sum = 0;
+                for (let i = 1; i <= n; i++) {
+                    sum += i;
+                }
+                result.textContent = "Sum = " + sum;
+            }
+
+            else if (problem === "table") {
+                for (let i = 1; i <= 10; i++) {
+                    output.push(n + " x " + i + " = " + (n * i));
+                }
+                result.textContent = output.join(" | ");
+            }
+
+            else if (problem === "even") {
+                for (let i = 2; i <= n; i += 2) {
+                    output.push(i);
+                }
+                result.textContent = output.length
+                    ? output.join(", ")
+                    : "No even numbers in this range.";
+            }
+
+            else if (problem === "factorial") {
+                let factorial = 1;
+                for (let i = 1; i <= n; i++) {
+                    factorial *= i;
+                }
+                result.textContent = "Factorial = " + factorial;
+            }
+        }
+    </script>
+</body>
+</html>
